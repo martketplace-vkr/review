@@ -214,6 +214,102 @@ func (x *ReplyReviewResponse) GetReview() *domain.Review {
 	return nil
 }
 
+type DeleteReviewReplyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VendorId      int64                  `protobuf:"varint,1,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	ReviewId      int64                  `protobuf:"varint,2,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteReviewReplyRequest) Reset() {
+	*x = DeleteReviewReplyRequest{}
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteReviewReplyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteReviewReplyRequest) ProtoMessage() {}
+
+func (x *DeleteReviewReplyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteReviewReplyRequest.ProtoReflect.Descriptor instead.
+func (*DeleteReviewReplyRequest) Descriptor() ([]byte, []int) {
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeleteReviewReplyRequest) GetVendorId() int64 {
+	if x != nil {
+		return x.VendorId
+	}
+	return 0
+}
+
+func (x *DeleteReviewReplyRequest) GetReviewId() int64 {
+	if x != nil {
+		return x.ReviewId
+	}
+	return 0
+}
+
+type DeleteReviewReplyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Review        *domain.Review         `protobuf:"bytes,1,opt,name=review,proto3" json:"review,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteReviewReplyResponse) Reset() {
+	*x = DeleteReviewReplyResponse{}
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteReviewReplyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteReviewReplyResponse) ProtoMessage() {}
+
+func (x *DeleteReviewReplyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteReviewReplyResponse.ProtoReflect.Descriptor instead.
+func (*DeleteReviewReplyResponse) Descriptor() ([]byte, []int) {
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteReviewReplyResponse) GetReview() *domain.Review {
+	if x != nil {
+		return x.Review
+	}
+	return nil
+}
+
 type DisputeReviewRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VendorId      int64                  `protobuf:"varint,1,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
@@ -225,7 +321,7 @@ type DisputeReviewRequest struct {
 
 func (x *DisputeReviewRequest) Reset() {
 	*x = DisputeReviewRequest{}
-	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[4]
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -237,7 +333,7 @@ func (x *DisputeReviewRequest) String() string {
 func (*DisputeReviewRequest) ProtoMessage() {}
 
 func (x *DisputeReviewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[4]
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -250,7 +346,7 @@ func (x *DisputeReviewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisputeReviewRequest.ProtoReflect.Descriptor instead.
 func (*DisputeReviewRequest) Descriptor() ([]byte, []int) {
-	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{4}
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DisputeReviewRequest) GetVendorId() int64 {
@@ -283,7 +379,7 @@ type DisputeReviewResponse struct {
 
 func (x *DisputeReviewResponse) Reset() {
 	*x = DisputeReviewResponse{}
-	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[5]
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -295,7 +391,7 @@ func (x *DisputeReviewResponse) String() string {
 func (*DisputeReviewResponse) ProtoMessage() {}
 
 func (x *DisputeReviewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[5]
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -308,10 +404,106 @@ func (x *DisputeReviewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisputeReviewResponse.ProtoReflect.Descriptor instead.
 func (*DisputeReviewResponse) Descriptor() ([]byte, []int) {
-	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{5}
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DisputeReviewResponse) GetReview() *domain.Review {
+	if x != nil {
+		return x.Review
+	}
+	return nil
+}
+
+type CancelReviewDisputeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VendorId      int64                  `protobuf:"varint,1,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	ReviewId      int64                  `protobuf:"varint,2,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelReviewDisputeRequest) Reset() {
+	*x = CancelReviewDisputeRequest{}
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelReviewDisputeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelReviewDisputeRequest) ProtoMessage() {}
+
+func (x *CancelReviewDisputeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelReviewDisputeRequest.ProtoReflect.Descriptor instead.
+func (*CancelReviewDisputeRequest) Descriptor() ([]byte, []int) {
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CancelReviewDisputeRequest) GetVendorId() int64 {
+	if x != nil {
+		return x.VendorId
+	}
+	return 0
+}
+
+func (x *CancelReviewDisputeRequest) GetReviewId() int64 {
+	if x != nil {
+		return x.ReviewId
+	}
+	return 0
+}
+
+type CancelReviewDisputeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Review        *domain.Review         `protobuf:"bytes,1,opt,name=review,proto3" json:"review,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelReviewDisputeResponse) Reset() {
+	*x = CancelReviewDisputeResponse{}
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelReviewDisputeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelReviewDisputeResponse) ProtoMessage() {}
+
+func (x *CancelReviewDisputeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_vendor_review_vendor_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelReviewDisputeResponse.ProtoReflect.Descriptor instead.
+func (*CancelReviewDisputeResponse) Descriptor() ([]byte, []int) {
+	return file_v1_vendor_review_vendor_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CancelReviewDisputeResponse) GetReview() *domain.Review {
 	if x != nil {
 		return x.Review
 	}
@@ -332,17 +524,29 @@ const file_v1_vendor_review_vendor_service_proto_rawDesc = "" +
 	"\treview_id\x18\x02 \x01(\x03R\breviewId\x12\x18\n" +
 	"\acomment\x18\x03 \x01(\tR\acomment\"X\n" +
 	"\x13ReplyReviewResponse\x12A\n" +
+	"\x06review\x18\x01 \x01(\v2).martketplace.vkr.review.v1.domain.ReviewR\x06review\"T\n" +
+	"\x18DeleteReviewReplyRequest\x12\x1b\n" +
+	"\tvendor_id\x18\x01 \x01(\x03R\bvendorId\x12\x1b\n" +
+	"\treview_id\x18\x02 \x01(\x03R\breviewId\"^\n" +
+	"\x19DeleteReviewReplyResponse\x12A\n" +
 	"\x06review\x18\x01 \x01(\v2).martketplace.vkr.review.v1.domain.ReviewR\x06review\"h\n" +
 	"\x14DisputeReviewRequest\x12\x1b\n" +
 	"\tvendor_id\x18\x01 \x01(\x03R\bvendorId\x12\x1b\n" +
 	"\treview_id\x18\x02 \x01(\x03R\breviewId\x12\x16\n" +
 	"\x06reason\x18\x03 \x01(\tR\x06reason\"Z\n" +
 	"\x15DisputeReviewResponse\x12A\n" +
-	"\x06review\x18\x01 \x01(\v2).martketplace.vkr.review.v1.domain.ReviewR\x06review2\xa9\x03\n" +
+	"\x06review\x18\x01 \x01(\v2).martketplace.vkr.review.v1.domain.ReviewR\x06review\"V\n" +
+	"\x1aCancelReviewDisputeRequest\x12\x1b\n" +
+	"\tvendor_id\x18\x01 \x01(\x03R\bvendorId\x12\x1b\n" +
+	"\treview_id\x18\x02 \x01(\x03R\breviewId\"`\n" +
+	"\x1bCancelReviewDisputeResponse\x12A\n" +
+	"\x06review\x18\x01 \x01(\v2).martketplace.vkr.review.v1.domain.ReviewR\x06review2\xd1\x05\n" +
 	"\x13ReviewVendorService\x12\x8e\x01\n" +
 	"\x11ListVendorReviews\x12;.martketplace.vkr.review.v1.vendor.ListVendorReviewsRequest\x1a<.martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse\x12|\n" +
-	"\vReplyReview\x125.martketplace.vkr.review.v1.vendor.ReplyReviewRequest\x1a6.martketplace.vkr.review.v1.vendor.ReplyReviewResponse\x12\x82\x01\n" +
-	"\rDisputeReview\x127.martketplace.vkr.review.v1.vendor.DisputeReviewRequest\x1a8.martketplace.vkr.review.v1.vendor.DisputeReviewResponseBBZ@github.com/martketplace-vkr/review/pkg/api/grpc/v1/vendor;vendorb\x06proto3"
+	"\vReplyReview\x125.martketplace.vkr.review.v1.vendor.ReplyReviewRequest\x1a6.martketplace.vkr.review.v1.vendor.ReplyReviewResponse\x12\x8e\x01\n" +
+	"\x11DeleteReviewReply\x12;.martketplace.vkr.review.v1.vendor.DeleteReviewReplyRequest\x1a<.martketplace.vkr.review.v1.vendor.DeleteReviewReplyResponse\x12\x82\x01\n" +
+	"\rDisputeReview\x127.martketplace.vkr.review.v1.vendor.DisputeReviewRequest\x1a8.martketplace.vkr.review.v1.vendor.DisputeReviewResponse\x12\x94\x01\n" +
+	"\x13CancelReviewDispute\x12=.martketplace.vkr.review.v1.vendor.CancelReviewDisputeRequest\x1a>.martketplace.vkr.review.v1.vendor.CancelReviewDisputeResponseBBZ@github.com/martketplace-vkr/review/pkg/api/grpc/v1/vendor;vendorb\x06proto3"
 
 var (
 	file_v1_vendor_review_vendor_service_proto_rawDescOnce sync.Once
@@ -356,31 +560,41 @@ func file_v1_vendor_review_vendor_service_proto_rawDescGZIP() []byte {
 	return file_v1_vendor_review_vendor_service_proto_rawDescData
 }
 
-var file_v1_vendor_review_vendor_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_v1_vendor_review_vendor_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_v1_vendor_review_vendor_service_proto_goTypes = []any{
-	(*ListVendorReviewsRequest)(nil),  // 0: martketplace.vkr.review.v1.vendor.ListVendorReviewsRequest
-	(*ListVendorReviewsResponse)(nil), // 1: martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse
-	(*ReplyReviewRequest)(nil),        // 2: martketplace.vkr.review.v1.vendor.ReplyReviewRequest
-	(*ReplyReviewResponse)(nil),       // 3: martketplace.vkr.review.v1.vendor.ReplyReviewResponse
-	(*DisputeReviewRequest)(nil),      // 4: martketplace.vkr.review.v1.vendor.DisputeReviewRequest
-	(*DisputeReviewResponse)(nil),     // 5: martketplace.vkr.review.v1.vendor.DisputeReviewResponse
-	(*domain.Review)(nil),             // 6: martketplace.vkr.review.v1.domain.Review
+	(*ListVendorReviewsRequest)(nil),    // 0: martketplace.vkr.review.v1.vendor.ListVendorReviewsRequest
+	(*ListVendorReviewsResponse)(nil),   // 1: martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse
+	(*ReplyReviewRequest)(nil),          // 2: martketplace.vkr.review.v1.vendor.ReplyReviewRequest
+	(*ReplyReviewResponse)(nil),         // 3: martketplace.vkr.review.v1.vendor.ReplyReviewResponse
+	(*DeleteReviewReplyRequest)(nil),    // 4: martketplace.vkr.review.v1.vendor.DeleteReviewReplyRequest
+	(*DeleteReviewReplyResponse)(nil),   // 5: martketplace.vkr.review.v1.vendor.DeleteReviewReplyResponse
+	(*DisputeReviewRequest)(nil),        // 6: martketplace.vkr.review.v1.vendor.DisputeReviewRequest
+	(*DisputeReviewResponse)(nil),       // 7: martketplace.vkr.review.v1.vendor.DisputeReviewResponse
+	(*CancelReviewDisputeRequest)(nil),  // 8: martketplace.vkr.review.v1.vendor.CancelReviewDisputeRequest
+	(*CancelReviewDisputeResponse)(nil), // 9: martketplace.vkr.review.v1.vendor.CancelReviewDisputeResponse
+	(*domain.Review)(nil),               // 10: martketplace.vkr.review.v1.domain.Review
 }
 var file_v1_vendor_review_vendor_service_proto_depIdxs = []int32{
-	6, // 0: martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse.reviews:type_name -> martketplace.vkr.review.v1.domain.Review
-	6, // 1: martketplace.vkr.review.v1.vendor.ReplyReviewResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
-	6, // 2: martketplace.vkr.review.v1.vendor.DisputeReviewResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
-	0, // 3: martketplace.vkr.review.v1.vendor.ReviewVendorService.ListVendorReviews:input_type -> martketplace.vkr.review.v1.vendor.ListVendorReviewsRequest
-	2, // 4: martketplace.vkr.review.v1.vendor.ReviewVendorService.ReplyReview:input_type -> martketplace.vkr.review.v1.vendor.ReplyReviewRequest
-	4, // 5: martketplace.vkr.review.v1.vendor.ReviewVendorService.DisputeReview:input_type -> martketplace.vkr.review.v1.vendor.DisputeReviewRequest
-	1, // 6: martketplace.vkr.review.v1.vendor.ReviewVendorService.ListVendorReviews:output_type -> martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse
-	3, // 7: martketplace.vkr.review.v1.vendor.ReviewVendorService.ReplyReview:output_type -> martketplace.vkr.review.v1.vendor.ReplyReviewResponse
-	5, // 8: martketplace.vkr.review.v1.vendor.ReviewVendorService.DisputeReview:output_type -> martketplace.vkr.review.v1.vendor.DisputeReviewResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	10, // 0: martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse.reviews:type_name -> martketplace.vkr.review.v1.domain.Review
+	10, // 1: martketplace.vkr.review.v1.vendor.ReplyReviewResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
+	10, // 2: martketplace.vkr.review.v1.vendor.DeleteReviewReplyResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
+	10, // 3: martketplace.vkr.review.v1.vendor.DisputeReviewResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
+	10, // 4: martketplace.vkr.review.v1.vendor.CancelReviewDisputeResponse.review:type_name -> martketplace.vkr.review.v1.domain.Review
+	0,  // 5: martketplace.vkr.review.v1.vendor.ReviewVendorService.ListVendorReviews:input_type -> martketplace.vkr.review.v1.vendor.ListVendorReviewsRequest
+	2,  // 6: martketplace.vkr.review.v1.vendor.ReviewVendorService.ReplyReview:input_type -> martketplace.vkr.review.v1.vendor.ReplyReviewRequest
+	4,  // 7: martketplace.vkr.review.v1.vendor.ReviewVendorService.DeleteReviewReply:input_type -> martketplace.vkr.review.v1.vendor.DeleteReviewReplyRequest
+	6,  // 8: martketplace.vkr.review.v1.vendor.ReviewVendorService.DisputeReview:input_type -> martketplace.vkr.review.v1.vendor.DisputeReviewRequest
+	8,  // 9: martketplace.vkr.review.v1.vendor.ReviewVendorService.CancelReviewDispute:input_type -> martketplace.vkr.review.v1.vendor.CancelReviewDisputeRequest
+	1,  // 10: martketplace.vkr.review.v1.vendor.ReviewVendorService.ListVendorReviews:output_type -> martketplace.vkr.review.v1.vendor.ListVendorReviewsResponse
+	3,  // 11: martketplace.vkr.review.v1.vendor.ReviewVendorService.ReplyReview:output_type -> martketplace.vkr.review.v1.vendor.ReplyReviewResponse
+	5,  // 12: martketplace.vkr.review.v1.vendor.ReviewVendorService.DeleteReviewReply:output_type -> martketplace.vkr.review.v1.vendor.DeleteReviewReplyResponse
+	7,  // 13: martketplace.vkr.review.v1.vendor.ReviewVendorService.DisputeReview:output_type -> martketplace.vkr.review.v1.vendor.DisputeReviewResponse
+	9,  // 14: martketplace.vkr.review.v1.vendor.ReviewVendorService.CancelReviewDispute:output_type -> martketplace.vkr.review.v1.vendor.CancelReviewDisputeResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_v1_vendor_review_vendor_service_proto_init() }
@@ -394,7 +608,7 @@ func file_v1_vendor_review_vendor_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_vendor_review_vendor_service_proto_rawDesc), len(file_v1_vendor_review_vendor_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -9,7 +9,9 @@ import "v1/domain/review_domain.proto";
 service ReviewVendorService {
   rpc ListVendorReviews(ListVendorReviewsRequest) returns (ListVendorReviewsResponse);
   rpc ReplyReview(ReplyReviewRequest) returns (ReplyReviewResponse);
+  rpc DeleteReviewReply(DeleteReviewReplyRequest) returns (DeleteReviewReplyResponse);
   rpc DisputeReview(DisputeReviewRequest) returns (DisputeReviewResponse);
+  rpc CancelReviewDispute(CancelReviewDisputeRequest) returns (CancelReviewDisputeResponse);
 }
 
 message ListVendorReviewsRequest {
@@ -30,6 +32,15 @@ message ReplyReviewResponse {
   martketplace.vkr.review.v1.domain.Review review = 1;
 }
 
+message DeleteReviewReplyRequest {
+  int64 vendor_id = 1;
+  int64 review_id = 2;
+}
+
+message DeleteReviewReplyResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+}
+
 message DisputeReviewRequest {
   int64 vendor_id = 1;
   int64 review_id = 2;
@@ -37,5 +48,14 @@ message DisputeReviewRequest {
 }
 
 message DisputeReviewResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+}
+
+message CancelReviewDisputeRequest {
+  int64 vendor_id = 1;
+  int64 review_id = 2;
+}
+
+message CancelReviewDisputeResponse {
   martketplace.vkr.review.v1.domain.Review review = 1;
 }

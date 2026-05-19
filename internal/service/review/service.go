@@ -204,6 +204,22 @@ func (s *Service) ReplyReview(ctx context.Context, vendorID int64, reviewID int6
 	return review, nil
 }
 
+func (s *Service) DeleteReviewReply(ctx context.Context, vendorID int64, reviewID int64) (*domain.Review, error) {
+	if err := validateID("vendor_id", vendorID); err != nil {
+		return nil, err
+	}
+	if err := validateID("review_id", reviewID); err != nil {
+		return nil, err
+	}
+
+	review, err := s.repository.DeleteReply(ctx, reviewID, vendorID)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return review, nil
+}
+
 func (s *Service) DisputeReview(ctx context.Context, vendorID int64, reviewID int64, reason string) (*domain.Review, error) {
 	if err := validateID("vendor_id", vendorID); err != nil {
 		return nil, err
@@ -218,6 +234,22 @@ func (s *Service) DisputeReview(ctx context.Context, vendorID int64, reviewID in
 	}
 
 	review, err := s.repository.CreateDispute(ctx, reviewID, vendorID, reason)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return review, nil
+}
+
+func (s *Service) CancelReviewDispute(ctx context.Context, vendorID int64, reviewID int64) (*domain.Review, error) {
+	if err := validateID("vendor_id", vendorID); err != nil {
+		return nil, err
+	}
+	if err := validateID("review_id", reviewID); err != nil {
+		return nil, err
+	}
+
+	review, err := s.repository.CancelDispute(ctx, reviewID, vendorID)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}

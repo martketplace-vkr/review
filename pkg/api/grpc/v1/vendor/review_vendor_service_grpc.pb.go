@@ -19,9 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReviewVendorService_ListVendorReviews_FullMethodName = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/ListVendorReviews"
-	ReviewVendorService_ReplyReview_FullMethodName       = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/ReplyReview"
-	ReviewVendorService_DisputeReview_FullMethodName     = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/DisputeReview"
+	ReviewVendorService_ListVendorReviews_FullMethodName   = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/ListVendorReviews"
+	ReviewVendorService_ReplyReview_FullMethodName         = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/ReplyReview"
+	ReviewVendorService_DeleteReviewReply_FullMethodName   = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/DeleteReviewReply"
+	ReviewVendorService_DisputeReview_FullMethodName       = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/DisputeReview"
+	ReviewVendorService_CancelReviewDispute_FullMethodName = "/martketplace.vkr.review.v1.vendor.ReviewVendorService/CancelReviewDispute"
 )
 
 // ReviewVendorServiceClient is the client API for ReviewVendorService service.
@@ -30,7 +32,9 @@ const (
 type ReviewVendorServiceClient interface {
 	ListVendorReviews(ctx context.Context, in *ListVendorReviewsRequest, opts ...grpc.CallOption) (*ListVendorReviewsResponse, error)
 	ReplyReview(ctx context.Context, in *ReplyReviewRequest, opts ...grpc.CallOption) (*ReplyReviewResponse, error)
+	DeleteReviewReply(ctx context.Context, in *DeleteReviewReplyRequest, opts ...grpc.CallOption) (*DeleteReviewReplyResponse, error)
 	DisputeReview(ctx context.Context, in *DisputeReviewRequest, opts ...grpc.CallOption) (*DisputeReviewResponse, error)
+	CancelReviewDispute(ctx context.Context, in *CancelReviewDisputeRequest, opts ...grpc.CallOption) (*CancelReviewDisputeResponse, error)
 }
 
 type reviewVendorServiceClient struct {
@@ -61,10 +65,30 @@ func (c *reviewVendorServiceClient) ReplyReview(ctx context.Context, in *ReplyRe
 	return out, nil
 }
 
+func (c *reviewVendorServiceClient) DeleteReviewReply(ctx context.Context, in *DeleteReviewReplyRequest, opts ...grpc.CallOption) (*DeleteReviewReplyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteReviewReplyResponse)
+	err := c.cc.Invoke(ctx, ReviewVendorService_DeleteReviewReply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *reviewVendorServiceClient) DisputeReview(ctx context.Context, in *DisputeReviewRequest, opts ...grpc.CallOption) (*DisputeReviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DisputeReviewResponse)
 	err := c.cc.Invoke(ctx, ReviewVendorService_DisputeReview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *reviewVendorServiceClient) CancelReviewDispute(ctx context.Context, in *CancelReviewDisputeRequest, opts ...grpc.CallOption) (*CancelReviewDisputeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelReviewDisputeResponse)
+	err := c.cc.Invoke(ctx, ReviewVendorService_CancelReviewDispute_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +101,9 @@ func (c *reviewVendorServiceClient) DisputeReview(ctx context.Context, in *Dispu
 type ReviewVendorServiceServer interface {
 	ListVendorReviews(context.Context, *ListVendorReviewsRequest) (*ListVendorReviewsResponse, error)
 	ReplyReview(context.Context, *ReplyReviewRequest) (*ReplyReviewResponse, error)
+	DeleteReviewReply(context.Context, *DeleteReviewReplyRequest) (*DeleteReviewReplyResponse, error)
 	DisputeReview(context.Context, *DisputeReviewRequest) (*DisputeReviewResponse, error)
+	CancelReviewDispute(context.Context, *CancelReviewDisputeRequest) (*CancelReviewDisputeResponse, error)
 	mustEmbedUnimplementedReviewVendorServiceServer()
 }
 
@@ -94,8 +120,14 @@ func (UnimplementedReviewVendorServiceServer) ListVendorReviews(context.Context,
 func (UnimplementedReviewVendorServiceServer) ReplyReview(context.Context, *ReplyReviewRequest) (*ReplyReviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplyReview not implemented")
 }
+func (UnimplementedReviewVendorServiceServer) DeleteReviewReply(context.Context, *DeleteReviewReplyRequest) (*DeleteReviewReplyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteReviewReply not implemented")
+}
 func (UnimplementedReviewVendorServiceServer) DisputeReview(context.Context, *DisputeReviewRequest) (*DisputeReviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisputeReview not implemented")
+}
+func (UnimplementedReviewVendorServiceServer) CancelReviewDispute(context.Context, *CancelReviewDisputeRequest) (*CancelReviewDisputeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelReviewDispute not implemented")
 }
 func (UnimplementedReviewVendorServiceServer) mustEmbedUnimplementedReviewVendorServiceServer() {}
 func (UnimplementedReviewVendorServiceServer) testEmbeddedByValue()                             {}
@@ -154,6 +186,24 @@ func _ReviewVendorService_ReplyReview_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ReviewVendorService_DeleteReviewReply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteReviewReplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewVendorServiceServer).DeleteReviewReply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReviewVendorService_DeleteReviewReply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewVendorServiceServer).DeleteReviewReply(ctx, req.(*DeleteReviewReplyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ReviewVendorService_DisputeReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DisputeReviewRequest)
 	if err := dec(in); err != nil {
@@ -168,6 +218,24 @@ func _ReviewVendorService_DisputeReview_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ReviewVendorServiceServer).DisputeReview(ctx, req.(*DisputeReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ReviewVendorService_CancelReviewDispute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelReviewDisputeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewVendorServiceServer).CancelReviewDispute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ReviewVendorService_CancelReviewDispute_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewVendorServiceServer).CancelReviewDispute(ctx, req.(*CancelReviewDisputeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,8 +256,16 @@ var ReviewVendorService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ReviewVendorService_ReplyReview_Handler,
 		},
 		{
+			MethodName: "DeleteReviewReply",
+			Handler:    _ReviewVendorService_DeleteReviewReply_Handler,
+		},
+		{
 			MethodName: "DisputeReview",
 			Handler:    _ReviewVendorService_DisputeReview_Handler,
+		},
+		{
+			MethodName: "CancelReviewDispute",
+			Handler:    _ReviewVendorService_CancelReviewDispute_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

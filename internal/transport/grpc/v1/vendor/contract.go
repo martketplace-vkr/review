@@ -9,5 +9,7 @@ import (
 type service interface {
 	ListVendorReviews(ctx context.Context, vendorID int64) ([]domain.Review, error)
 	ReplyReview(ctx context.Context, vendorID int64, reviewID int64, comment string) (*domain.Review, error)
+	DeleteReviewReply(ctx context.Context, vendorID int64, reviewID int64) (*domain.Review, error)
 	DisputeReview(ctx context.Context, vendorID int64, reviewID int64, reason string) (*domain.Review, error)
+	CancelReviewDispute(ctx context.Context, vendorID int64, reviewID int64) (*domain.Review, error)
 }

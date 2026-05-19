@@ -19,7 +19,9 @@ type repository interface {
 	UpsertVote(ctx context.Context, reviewID int64, userID int64, vote string) (*domain.Review, error)
 	CreateReport(ctx context.Context, report domain.Report) (*domain.Report, error)
 	UpsertReply(ctx context.Context, reviewID int64, vendorID int64, comment string) (*domain.Review, error)
+	DeleteReply(ctx context.Context, reviewID int64, vendorID int64) (*domain.Review, error)
 	CreateDispute(ctx context.Context, reviewID int64, vendorID int64, reason string) (*domain.Review, error)
+	CancelDispute(ctx context.Context, reviewID int64, vendorID int64) (*domain.Review, error)
 	ResolveDispute(ctx context.Context, reviewID int64, disputeID int64, adminID int64, accepted bool, comment string) (*domain.Review, error)
 	DeleteReview(ctx context.Context, reviewID int64, adminID int64) error
 	RatingSummary(ctx context.Context, productID int64) (*domain.RatingSummary, error)

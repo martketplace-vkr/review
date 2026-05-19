@@ -266,6 +266,31 @@ func (r *Repository) UpsertReply(ctx context.Context, reviewID int64, vendorID i
 	return r.GetReview(ctx, reviewID)
 }
 
+func (r *Repository) DeleteReply(ctx context.Context, reviewID int64, vendorID int64) (*domain.Review, error) {
+	result, err := r.db.ExecContext(ctx, `
+		update review.review_replies rr
+		set
+			deleted_at = now(),
+			updated_at = now()
+		from review.reviews r
+		where rr.review_id = r.id
+			and rr.review_id = $1
+			and rr.vendor_id = $2
+			and r.vendor_id = $2
+			and r.deleted_at is null
+			and rr.deleted_at is null
+	`, reviewID, vendorID)
+	if err != nil {
+		return nil, err
+	}
+
+	if affected, _ := result.RowsAffected(); affected == 0 {
+		return nil, sql.ErrNoRows
+	}
+
+	return r.GetReview(ctx, reviewID)
+}
+
 func (r *Repository) CreateDispute(ctx context.Context, reviewID int64, vendorID int64, reason string) (*domain.Review, error) {
 	query := `
 		insert into review.review_disputes (review_id, vendor_id, reason)
@@ -283,6 +308,28 @@ func (r *Repository) CreateDispute(ctx context.Context, reviewID int64, vendorID
 	if err != nil {
 		return nil, err
 	}
+	if affected, _ := result.RowsAffected(); affected == 0 {
+		return nil, sql.ErrNoRows
+	}
+
+	return r.GetReview(ctx, reviewID)
+}
+
+func (r *Repository) CancelDispute(ctx context.Context, reviewID int64, vendorID int64) (*domain.Review, error) {
+	result, err := r.db.ExecContext(ctx, `
+		delete from review.review_disputes rd
+		using review.reviews r
+		where rd.review_id = r.id
+			and rd.review_id = $1
+			and rd.vendor_id = $2
+			and r.vendor_id = $2
+			and rd.status = $3
+			and r.deleted_at is null
+	`, reviewID, vendorID, domain.DisputePending)
+	if err != nil {
+		return nil, err
+	}
+
 	if affected, _ := result.RowsAffected(); affected == 0 {
 		return nil, sql.ErrNoRows
 	}

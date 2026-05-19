@@ -38,6 +38,15 @@ func (h *Handler) ReplyReview(ctx context.Context, req *vendorpb.ReplyReviewRequ
 	return &vendorpb.ReplyReviewResponse{Review: mapper.ReviewToProto(review)}, nil
 }
 
+func (h *Handler) DeleteReviewReply(ctx context.Context, req *vendorpb.DeleteReviewReplyRequest) (*vendorpb.DeleteReviewReplyResponse, error) {
+	review, err := h.service.DeleteReviewReply(ctx, req.GetVendorId(), req.GetReviewId())
+	if err != nil {
+		return nil, toStatusError(err)
+	}
+
+	return &vendorpb.DeleteReviewReplyResponse{Review: mapper.ReviewToProto(review)}, nil
+}
+
 func (h *Handler) DisputeReview(ctx context.Context, req *vendorpb.DisputeReviewRequest) (*vendorpb.DisputeReviewResponse, error) {
 	review, err := h.service.DisputeReview(ctx, req.GetVendorId(), req.GetReviewId(), req.GetReason())
 	if err != nil {
@@ -45,6 +54,15 @@ func (h *Handler) DisputeReview(ctx context.Context, req *vendorpb.DisputeReview
 	}
 
 	return &vendorpb.DisputeReviewResponse{Review: mapper.ReviewToProto(review)}, nil
+}
+
+func (h *Handler) CancelReviewDispute(ctx context.Context, req *vendorpb.CancelReviewDisputeRequest) (*vendorpb.CancelReviewDisputeResponse, error) {
+	review, err := h.service.CancelReviewDispute(ctx, req.GetVendorId(), req.GetReviewId())
+	if err != nil {
+		return nil, toStatusError(err)
+	}
+
+	return &vendorpb.CancelReviewDisputeResponse{Review: mapper.ReviewToProto(review)}, nil
 }
 
 func toStatusError(err error) error {
