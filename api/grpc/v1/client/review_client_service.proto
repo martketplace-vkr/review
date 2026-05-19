@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package martketplace.vkr.review.v1.client;
+
+option go_package = "github.com/martketplace-vkr/review/pkg/api/grpc/v1/client;client";
+
+import "v1/domain/review_domain.proto";
+
+service ReviewClientService {
+  rpc ListProductReviews(ListProductReviewsRequest) returns (ListProductReviewsResponse);
+  rpc CreateReview(CreateReviewRequest) returns (CreateReviewResponse);
+  rpc VoteReview(VoteReviewRequest) returns (VoteReviewResponse);
+  rpc ReportReview(ReportReviewRequest) returns (ReportReviewResponse);
+}
+
+message ListProductReviewsRequest {
+  int64 product_id = 1;
+}
+
+message ListProductReviewsResponse {
+  repeated martketplace.vkr.review.v1.domain.Review reviews = 1;
+  martketplace.vkr.review.v1.domain.RatingSummary summary = 2;
+}
+
+message CreateReviewRequest {
+  int64 product_id = 1;
+  int64 author_user_id = 2;
+  string author_name = 3;
+  int32 rating = 4;
+  string comment = 5;
+  repeated string image_urls = 6;
+}
+
+message CreateReviewResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+  martketplace.vkr.review.v1.domain.RatingSummary summary = 2;
+}
+
+message VoteReviewRequest {
+  int64 review_id = 1;
+  int64 user_id = 2;
+  string vote = 3;
+}
+
+message VoteReviewResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+}
+
+message ReportReviewRequest {
+  int64 review_id = 1;
+  int64 reporter_user_id = 2;
+  string reason = 3;
+  string details = 4;
+}
+
+message ReportReviewResponse {
+  martketplace.vkr.review.v1.domain.ReviewReport report = 1;
+}

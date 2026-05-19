@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package martketplace.vkr.review.v1.vendor;
+
+option go_package = "github.com/martketplace-vkr/review/pkg/api/grpc/v1/vendor;vendor";
+
+import "v1/domain/review_domain.proto";
+
+service ReviewVendorService {
+  rpc ListVendorReviews(ListVendorReviewsRequest) returns (ListVendorReviewsResponse);
+  rpc ReplyReview(ReplyReviewRequest) returns (ReplyReviewResponse);
+  rpc DisputeReview(DisputeReviewRequest) returns (DisputeReviewResponse);
+}
+
+message ListVendorReviewsRequest {
+  int64 vendor_id = 1;
+}
+
+message ListVendorReviewsResponse {
+  repeated martketplace.vkr.review.v1.domain.Review reviews = 1;
+}
+
+message ReplyReviewRequest {
+  int64 vendor_id = 1;
+  int64 review_id = 2;
+  string comment = 3;
+}
+
+message ReplyReviewResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+}
+
+message DisputeReviewRequest {
+  int64 vendor_id = 1;
+  int64 review_id = 2;
+  string reason = 3;
+}
+
+message DisputeReviewResponse {
+  martketplace.vkr.review.v1.domain.Review review = 1;
+}

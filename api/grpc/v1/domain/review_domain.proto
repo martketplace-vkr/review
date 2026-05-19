@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package martketplace.vkr.review.v1.domain;
+
+option go_package = "github.com/martketplace-vkr/review/pkg/api/grpc/v1/domain;domain";
+
+import "google/protobuf/timestamp.proto";
+
+message ReviewImage {
+  int64 id = 1;
+  string url = 2;
+  uint32 sort_order = 3;
+}
+
+message ReviewReply {
+  int64 id = 1;
+  int64 vendor_id = 2;
+  string comment = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message ReviewDispute {
+  int64 id = 1;
+  int64 vendor_id = 2;
+  string reason = 3;
+  string status = 4;
+  string admin_comment = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp resolved_at = 7;
+}
+
+message Review {
+  int64 id = 1;
+  int64 product_id = 2;
+  int64 vendor_id = 3;
+  int64 author_user_id = 4;
+  string author_name = 5;
+  int32 rating = 6;
+  string comment = 7;
+  bool excluded_from_rating = 8;
+  int64 helpful_count = 9;
+  int64 not_helpful_count = 10;
+  repeated ReviewImage images = 11;
+  ReviewReply reply = 12;
+  ReviewDispute dispute = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+message RatingSummary {
+  int64 product_id = 1;
+  double average_rating = 2;
+  int64 rating_count = 3;
+  int64 one_star_count = 4;
+  int64 two_star_count = 5;
+  int64 three_star_count = 6;
+  int64 four_star_count = 7;
+  int64 five_star_count = 8;
+}
+
+message ReviewReport {
+  int64 id = 1;
+  int64 review_id = 2;
+  int64 reporter_user_id = 3;
+  string reason = 4;
+  string details = 5;
+  string status = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
