@@ -12,7 +12,6 @@ import (
 	catalogdomain "github.com/martketplace-vkr/catalog/pkg/api/grpc/v1/domain"
 	orderclient "github.com/martketplace-vkr/order/pkg/api/grpc/v1/client"
 	"github.com/martketplace-vkr/review/domain"
-	reviewpg "github.com/martketplace-vkr/review/internal/repository/pg"
 	"github.com/martketplace-vkr/review/internal/service/reviewerrors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -109,9 +108,6 @@ func (s *Service) CreateReview(ctx context.Context, req CreateReviewRequest) (*d
 		Comment:      comment,
 	}, normalizeImageURLs(req.ImageURLs))
 	if err != nil {
-		if reviewpg.IsUniqueViolation(err) {
-			return nil, nil, reviewerrors.ErrAlreadyExists
-		}
 		return nil, nil, mapRepositoryError(err)
 	}
 

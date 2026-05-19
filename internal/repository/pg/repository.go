@@ -35,6 +35,14 @@ func (r *Repository) CreateReview(ctx context.Context, review domain.Review, ima
 			rating,
 			comment
 		) values ($1, $2, $3, $4, $5, $6)
+		on conflict (product_id, author_user_id) where deleted_at is null
+		do update set
+			vendor_id = excluded.vendor_id,
+			author_name = excluded.author_name,
+			rating = excluded.rating,
+			comment = excluded.comment,
+			excluded_from_rating = false,
+			updated_at = now()
 		returning
 			id,
 			product_id,
@@ -61,6 +69,10 @@ func (r *Repository) CreateReview(ctx context.Context, review domain.Review, ima
 		review.Comment,
 	)
 	if err != nil {
+		return nil, err
+	}
+
+	if _, err = tx.ExecContext(ctx, `delete from review.review_images where review_id = $1`, created.ID); err != nil {
 		return nil, err
 	}
 
