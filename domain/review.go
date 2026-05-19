@@ -71,6 +71,11 @@ type Report struct {
 	CreatedAt      time.Time `db:"created_at"`
 }
 
+type ReportedReview struct {
+	Review Review
+	Report Report
+}
+
 type RatingSummary struct {
 	ProductID      int64   `db:"product_id"`
 	AverageRating  float64 `db:"average_rating"`

@@ -115,6 +115,49 @@ func (r *Repository) ListDisputedReviews(ctx context.Context, status string) ([]
 	`, status)
 }
 
+func (r *Repository) ListReportedReviews(ctx context.Context, status string) ([]domain.ReportedReview, error) {
+	status = strings.TrimSpace(status)
+	if status == "" {
+		status = domain.DisputePending
+	}
+
+	reports := make([]domain.Report, 0)
+	if err := r.db.SelectContext(ctx, &reports, `
+		select
+			id,
+			review_id,
+			reporter_user_id,
+			reason,
+			details,
+			status,
+			created_at
+		from review.review_reports
+		where status = $1
+		order by created_at asc, id asc
+	`, status); err != nil {
+		return nil, err
+	}
+
+	result := make([]domain.ReportedReview, 0, len(reports))
+	for _, report := range reports {
+		review, err := r.GetReview(ctx, report.ReviewID)
+		if err != nil {
+			if errors.Is(err, sql.ErrNoRows) {
+				continue
+			}
+
+			return nil, err
+		}
+
+		result = append(result, domain.ReportedReview{
+			Review: *review,
+			Report: report,
+		})
+	}
+
+	return result, nil
+}
+
 func (r *Repository) GetReview(ctx context.Context, reviewID int64) (*domain.Review, error) {
 	reviews, err := r.listReviews(ctx, `
 		where r.id = $1

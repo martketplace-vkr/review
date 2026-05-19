@@ -29,6 +29,23 @@ func (h *Handler) ListReviewDisputes(ctx context.Context, req *adminpb.ListRevie
 	return &adminpb.ListReviewDisputesResponse{Reviews: mapper.ReviewsToProto(reviews)}, nil
 }
 
+func (h *Handler) ListReviewReports(ctx context.Context, req *adminpb.ListReviewReportsRequest) (*adminpb.ListReviewReportsResponse, error) {
+	reports, err := h.service.ListReviewReports(ctx, req.GetStatus())
+	if err != nil {
+		return nil, toStatusError(err)
+	}
+
+	items := make([]*adminpb.ReportedReview, 0, len(reports))
+	for _, report := range reports {
+		items = append(items, &adminpb.ReportedReview{
+			Review: mapper.ReviewToProto(&report.Review),
+			Report: mapper.ReportToProto(&report.Report),
+		})
+	}
+
+	return &adminpb.ListReviewReportsResponse{Items: items}, nil
+}
+
 func (h *Handler) ResolveReviewDispute(ctx context.Context, req *adminpb.ResolveReviewDisputeRequest) (*adminpb.ResolveReviewDisputeResponse, error) {
 	review, err := h.service.ResolveReviewDispute(ctx, req.GetAdminId(), req.GetReviewId(), req.GetDisputeId(), req.GetDecision(), req.GetComment())
 	if err != nil {

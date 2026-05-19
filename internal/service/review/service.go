@@ -238,6 +238,15 @@ func (s *Service) ListReviewDisputes(ctx context.Context, status string) ([]doma
 	return reviews, nil
 }
 
+func (s *Service) ListReviewReports(ctx context.Context, status string) ([]domain.ReportedReview, error) {
+	reports, err := s.repository.ListReportedReviews(ctx, strings.TrimSpace(status))
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return reports, nil
+}
+
 func (s *Service) ResolveReviewDispute(ctx context.Context, adminID int64, reviewID int64, disputeID int64, decision string, comment string) (*domain.Review, error) {
 	if err := validateID("admin_id", adminID); err != nil {
 		return nil, err

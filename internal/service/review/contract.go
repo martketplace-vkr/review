@@ -14,6 +14,7 @@ type repository interface {
 	ListProductReviews(ctx context.Context, productID int64) ([]domain.Review, error)
 	ListVendorReviews(ctx context.Context, vendorID int64) ([]domain.Review, error)
 	ListDisputedReviews(ctx context.Context, status string) ([]domain.Review, error)
+	ListReportedReviews(ctx context.Context, status string) ([]domain.ReportedReview, error)
 	GetReview(ctx context.Context, reviewID int64) (*domain.Review, error)
 	UpsertVote(ctx context.Context, reviewID int64, userID int64, vote string) (*domain.Review, error)
 	CreateReport(ctx context.Context, report domain.Report) (*domain.Report, error)
